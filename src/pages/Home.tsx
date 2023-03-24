@@ -17,6 +17,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import NavBar from "./components/Navbar";
 import logo from "./assets/images/logo.png";
+import Bienvenida from "./components/Bienvenida";
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,6 +43,7 @@ function Home() {
     <BrowserRouter>
       {isLoggedIn ? <NavBarAdmin /> : <NavBar />}
       <Routes>
+        <Route path="/" element={<Bienvenida />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
         <Route path="/tipos" element={<ListaTipos />} />
