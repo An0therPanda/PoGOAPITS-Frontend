@@ -9,11 +9,11 @@ interface Usuario {
   password: string;
 }
 
-interface Props{
+interface Props {
   onLogin: () => void;
 }
 
-const Login = ({onLogin}: Props) => {
+const Login = ({ onLogin }: Props) => {
   const [usuario, setUsuario] = useState<Usuario>({
     username: "",
     password: "",
@@ -25,11 +25,14 @@ const Login = ({onLogin}: Props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      if(!usuario.username || !usuario.password){
+      if (!usuario.username || !usuario.password) {
         setError("Por favor ingrese un usuario y contraseña válidos.");
         return;
       }
-      const respuesta = await axios.post("http://localhost:8000/api/auth/login", usuario);
+      const respuesta = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
+        usuario
+      );
       setCookies("PoGO-AUTH", respuesta.data.authentication.sessionToken);
       onLogin();
       navigate("/admin/listapokemones");
@@ -38,9 +41,7 @@ const Login = ({onLogin}: Props) => {
     }
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUsuario({ ...usuario, [name]: value });
   };
@@ -50,25 +51,25 @@ const Login = ({onLogin}: Props) => {
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
         <Form.Label>Usuario: </Form.Label>
-          <Form.Control
-            type="text"
-            name="username"
-            value={usuario.username}
-            onChange={handleInputChange}
-          />
+        <Form.Control
+          type="text"
+          name="username"
+          value={usuario.username}
+          onChange={handleInputChange}
+        />
       </div>
       <div>
         <Form.Label>Contraseña: </Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={usuario.password}
-            onChange={handleInputChange}
-          />
+        <Form.Control
+          type="password"
+          name="password"
+          value={usuario.password}
+          onChange={handleInputChange}
+        />
       </div>
       <Button variant="success" type="submit">
-          Iniciar sesión
-        </Button>
+        Iniciar sesión
+      </Button>
     </Form>
   );
 };

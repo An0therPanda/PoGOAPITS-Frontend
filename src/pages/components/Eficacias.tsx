@@ -13,7 +13,9 @@ function Eficacias(): JSX.Element {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultado = await axios.get<Tipo[]>("http://localhost:8000/api/tipos");
+      const resultado = await axios.get<Tipo[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/tipos`
+      );
       setTipos(resultado.data);
     };
     fetchData();
@@ -32,9 +34,7 @@ function Eficacias(): JSX.Element {
       <div className="d-flex justify-content-center">
         <label>Selecciona un tipo: </label>
         <select className="ml-2" onChange={handleTipoSelected}>
-          <option>
-            Selecciona un tipo
-          </option>
+          <option>Selecciona un tipo</option>
           {tipos.map((tipo) => (
             <option key={tipo.id} value={tipo.id}>
               {tipo.label}

@@ -21,13 +21,15 @@ function AgregarAtaqueCargado(): JSX.Element {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultadoTipos = await axios.get<Tipo[]>("http://localhost:8000/api/tipos");
+      const resultadoTipos = await axios.get<Tipo[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/tipos`
+      );
       const resultadosAtaquesCargados = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquescargados"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquescargados`
       );
       setTipos(resultadoTipos.data);
       setAtaquesCargados(resultadosAtaquesCargados.data);
-    }
+    };
     fetchData();
   }, []);
 
@@ -54,19 +56,21 @@ function AgregarAtaqueCargado(): JSX.Element {
       pve: {
         dano: danopve,
         energia: energiapve,
-      }
-    }
+      },
+    };
 
-    const response = await axios.post("http://localhost:8000/api/ataquecargado", body);
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/ataquecargado`,
+      body
+    );
     console.log(response.data);
     setModalVisible(true);
-  }
+  };
 
   function handleModalClose() {
     setModalVisible(false);
     navigate("/admin/listapokemones");
   }
-
 
   return (
     <Container>
@@ -76,41 +80,28 @@ function AgregarAtaqueCargado(): JSX.Element {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nombre:</Form.Label>
-          <Form.Control type="text" id="inputNombre"/>
+          <Form.Control type="text" id="inputNombre" />
           <Form.Label>Tipo:</Form.Label>
-        <Form.Select id="selectTipo">
-          <option>
-            Selecciona el tipo
-          </option>
-          {tipos.map((tipo) => (
-            <option key={tipo.id} value={tipo.id}>
-              {tipo.label}
-            </option>
-          ))}
-        </Form.Select>
+          <Form.Select id="selectTipo">
+            <option>Selecciona el tipo</option>
+            {tipos.map((tipo) => (
+              <option key={tipo.id} value={tipo.id}>
+                {tipo.label}
+              </option>
+            ))}
+          </Form.Select>
           <br />
           <h4 className="text-center mt-2 font-weight-bold">PVP</h4>
           <Form.Label>Daño:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputDanoPVP"
-          />
+          <Form.Control type="number" id="inputDanoPVP" />
           <Form.Label>Energia:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputEnergiaPVP"
-          />
+          <Form.Control type="number" id="inputEnergiaPVP" />
           <br />
           <h4 className="text-center mt-2 font-weight-bold">PVE</h4>
           <Form.Label>Daño:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputDanoPVE"
-          />
+          <Form.Control type="number" id="inputDanoPVE" />
           <Form.Label>Energía:</Form.Label>
-          <Form.Control
-            id="inputEnergiaPVE"
-          />
+          <Form.Control id="inputEnergiaPVE" />
           <br />
         </Form.Group>
         <Button variant="success" type="submit">

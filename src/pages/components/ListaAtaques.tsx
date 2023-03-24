@@ -6,7 +6,7 @@ import Paginacion from "./Paginacion";
 interface AtaqueRapido {
   id: number;
   nombre: string;
-  tipo:{
+  tipo: {
     label: string;
     id: number;
   };
@@ -24,7 +24,7 @@ interface AtaqueRapido {
 interface AtaqueCargado {
   id: number;
   nombre: string;
-  tipo:{
+  tipo: {
     label: string;
     id: number;
   };
@@ -49,10 +49,10 @@ function ListaAtaques() {
   useEffect(() => {
     const fetchData = async () => {
       const resultadosAtaquesRapidos = await axios.get<AtaqueRapido[]>(
-        "http://localhost:8000/api/ataquesrapidos"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       const resultadosAtaquesCargados = await axios.get(
-        "http://localhost:8000/api/ataquescargados"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquescargados`
       );
       setAtaquesRapidos(resultadosAtaquesRapidos.data);
       setAtaquesCargados(resultadosAtaquesCargados.data);
@@ -80,7 +80,7 @@ function ListaAtaques() {
     setPaginaActualAtaqueRapido(numeroPagina);
 
   const paginacionAtaqueCargado = (numeroPagina: number) =>
-  setPaginaActualAtaqueCargado(numeroPagina);
+    setPaginaActualAtaqueCargado(numeroPagina);
 
   return (
     <Container className="position-relative">
@@ -111,7 +111,7 @@ function ListaAtaques() {
               <th className="text-white">Daño</th>
               <th className="text-white">Energía</th>
             </tr>
-            </thead>
+          </thead>
           <tbody className="text-center">
             {itemsActualesAtaqueRapido.map((ataque) => (
               <tr key={ataque.id}>
@@ -126,7 +126,12 @@ function ListaAtaques() {
             ))}
           </tbody>
         </Table>
-        <Paginacion elementosTotatales={ataquesRapidos.length} elementosPorPagina={elementosPorPagina} onPageChange={paginacionAtaqueRapido} paginaActual={paginaActualAtaqueRapido}/>
+        <Paginacion
+          elementosTotatales={ataquesRapidos.length}
+          elementosPorPagina={elementosPorPagina}
+          onPageChange={paginacionAtaqueRapido}
+          paginaActual={paginaActualAtaqueRapido}
+        />
       </Container>
       <h2 className="text-center mt-2 font-weight-bold">
         Lista de ataques cargados
@@ -170,9 +175,14 @@ function ListaAtaques() {
             ))}
           </tbody>
         </Table>
-        <Paginacion elementosTotatales={ataquesCargados.length} elementosPorPagina={elementosPorPagina} onPageChange={paginacionAtaqueCargado} paginaActual={paginaActualAtaqueCargado}/>
+        <Paginacion
+          elementosTotatales={ataquesCargados.length}
+          elementosPorPagina={elementosPorPagina}
+          onPageChange={paginacionAtaqueCargado}
+          paginaActual={paginaActualAtaqueCargado}
+        />
       </Container>
     </Container>
   );
-}           
+}
 export default ListaAtaques;

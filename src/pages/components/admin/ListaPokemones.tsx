@@ -25,7 +25,9 @@ function ListaPokemones(): JSX.Element {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultado = await axios.get<Pokemon[]>("http://localhost:8000/api/pokemones");
+      const resultado = await axios.get<Pokemon[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/pokemones`
+      );
       setPokemon(resultado.data);
     };
     fetchData();
@@ -33,7 +35,10 @@ function ListaPokemones(): JSX.Element {
 
   const indexUltimoItem: number = paginaActual * elementosPorPagina;
   const indexPrimerItem: number = indexUltimoItem - elementosPorPagina;
-  const itemsActuales: Pokemon[] = pokemon.slice(indexPrimerItem, indexUltimoItem);
+  const itemsActuales: Pokemon[] = pokemon.slice(
+    indexPrimerItem,
+    indexUltimoItem
+  );
 
   const paginacion = (numeroPagina: number) => setPaginaActual(numeroPagina);
 
@@ -87,9 +92,13 @@ function ListaPokemones(): JSX.Element {
           </tbody>
         </Table>
         <div className="position-relative">
-      <Paginacion
-      elementosTotatales={pokemon.length} elementosPorPagina={elementosPorPagina} onPageChange={paginacion} paginaActual={paginaActual}/>
-      </div>
+          <Paginacion
+            elementosTotatales={pokemon.length}
+            elementosPorPagina={elementosPorPagina}
+            onPageChange={paginacion}
+            paginaActual={paginaActual}
+          />
+        </div>
       </Container>
     </Container>
   );

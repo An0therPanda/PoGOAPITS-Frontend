@@ -25,7 +25,7 @@ function ModificarAtaqueRapido(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       const resultadoAtaque = await axios.get<Ataque>(
-        `http://localhost:8000/api/ataquerapido/${idAtaque}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquerapido/${idAtaque}`
       );
       setAtaque(resultadoAtaque.data);
     };
@@ -53,7 +53,10 @@ function ModificarAtaqueRapido(): JSX.Element {
     };
 
     axios
-      .patch(`http://localhost:8000/api/ataquerapido/${idAtaque}`, body)
+      .patch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquerapido/${idAtaque}`,
+        body
+      )
       .then((response) => {
         console.log(response.data);
         setModalVisible(true);
@@ -138,4 +141,4 @@ function ModificarAtaqueRapido(): JSX.Element {
   );
 }
 
-export default ModificarAtaqueRapido
+export default ModificarAtaqueRapido;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Form, Modal } from "react-bootstrap";
-import useCookies from "react-cookie/cjs/useCookies";
 
 interface Tipo {
   id: number;
@@ -19,19 +18,18 @@ function AgregarPokemon(): JSX.Element {
   const [ataquesRapidos, setAtaquesRapidos] = useState<Ataque[]>([]);
   const [ataquesCargados, setAtaquesCargados] = useState<Ataque[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [cookies, setCookies] = useCookies(["PoGO-AUTH"]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const resultadoTipos = await axios.get<Tipo[]>(
-        "http://localhost:8000/api/tipos"
+        `${process.env.REACT_APP_BACKEND_URL}/api/tipos`
       );
       const resultadoAtaquesRapidos = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquesrapidos"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       const resultadosAtaquesCargados = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquescargados"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquescargados`
       );
       setTipos(resultadoTipos.data);
       setAtaquesRapidos(resultadoAtaquesRapidos.data);
@@ -56,7 +54,7 @@ function AgregarPokemon(): JSX.Element {
     };
 
     const response = await axios.post(
-      "http://localhost:8000/api/pokemon",
+      `${process.env.REACT_APP_BACKEND_URL}/api/pokemon`,
       body,
       {
         withCredentials: true,

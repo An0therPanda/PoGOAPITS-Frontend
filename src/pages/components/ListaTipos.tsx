@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, Table } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Container, Table } from "react-bootstrap";
 
 type Tipo = {
   nombre: string;
   label: string;
-}
+};
 
 const ListaTipos: React.FC = () => {
   const [tipos, setTipos] = useState<Tipo[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultado = await axios.get<Tipo[]>("http://localhost:8000/api/tipos");
+      const resultado = await axios.get<Tipo[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/tipos`
+      );
       setTipos(resultado.data);
     };
     fetchData();
@@ -33,7 +35,12 @@ const ListaTipos: React.FC = () => {
             {tipos.map((tipo: Tipo) => (
               <tr key={tipo.nombre}>
                 <td>
-                  <img src={require(`../assets/icons/tipos/${tipo.nombre}.png`)} alt="icon" width="30" height="30"/>
+                  <img
+                    src={require(`../assets/icons/tipos/${tipo.nombre}.png`)}
+                    alt="icon"
+                    width="30"
+                    height="30"
+                  />
                 </td>
                 <td>{tipo.label}</td>
               </tr>
@@ -43,6 +50,6 @@ const ListaTipos: React.FC = () => {
       </div>
     </Container>
   );
-}
+};
 
 export default ListaTipos;

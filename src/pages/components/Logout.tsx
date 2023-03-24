@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-interface Props{
+interface Props {
   onLogout: () => void;
 }
 
-const Logout = ({onLogout}: Props) => {
+const Logout = ({ onLogout }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,14 +14,16 @@ const Logout = ({onLogout}: Props) => {
       try {
         onLogout();
         navigate("/");
-        await axios.post("http://localhost:8000/api/auth/logout");        
-      } catch (error){
+        await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/api/auth/logout`
+        );
+      } catch (error) {
         console.error(error);
       }
     };
     logout();
-  }, [onLogout, navigate])
+  }, [onLogout, navigate]);
   return null;
-}
+};
 
 export default Logout;

@@ -14,7 +14,7 @@ const TablaEficacia: React.FC<Props> = ({ idEficacia, idTipo }) => {
   useEffect(() => {
     const fetchData = async () => {
       const resultado = await axios.get<Array<any>>(
-        `http://localhost:8000/api/eficacia/${idEficacia}/${idTipo}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/eficacia/${idEficacia}/${idTipo}`
       );
       setEficacia(resultado.data);
     };

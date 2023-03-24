@@ -21,13 +21,15 @@ function AgregarAtaqueRapido(): JSX.Element {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultadoTipos = await axios.get<Tipo[]>("http://localhost:8000/api/tipos");
+      const resultadoTipos = await axios.get<Tipo[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/tipos`
+      );
       const resultadosAtaquesRapidos = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquesrapidos"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       setTipos(resultadoTipos.data);
       setAtaquesRapidos(resultadosAtaquesRapidos.data);
-    }
+    };
     fetchData();
   }, []);
 
@@ -54,13 +56,16 @@ function AgregarAtaqueRapido(): JSX.Element {
       pve: {
         dano: danopve,
         energia: energiapve,
-      }
-    }
+      },
+    };
 
-    const response = await axios.post("http://localhost:8000/api/ataquerapido", body);
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/ataquerapido`,
+      body
+    );
     console.log(response.data);
     setModalVisible(true);
-  }
+  };
 
   function handleModalClose() {
     setModalVisible(false);
@@ -75,47 +80,30 @@ function AgregarAtaqueRapido(): JSX.Element {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nombre:</Form.Label>
-          <Form.Control type="text" id="inputNombre"/>
+          <Form.Control type="text" id="inputNombre" />
           <Form.Label>Tipo:</Form.Label>
-        <Form.Select id="selectTipo">
-          <option>
-            Selecciona el tipo
-          </option>
-          {tipos.map((tipo) => (
-            <option key={tipo.id} value={tipo.id}>
-              {tipo.label}
-            </option>
-          ))}
-        </Form.Select>
+          <Form.Select id="selectTipo">
+            <option>Selecciona el tipo</option>
+            {tipos.map((tipo) => (
+              <option key={tipo.id} value={tipo.id}>
+                {tipo.label}
+              </option>
+            ))}
+          </Form.Select>
           <br />
           <h4 className="text-center mt-2 font-weight-bold">PVP</h4>
           <Form.Label>Daño:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputDanoPVP"
-          />
+          <Form.Control type="number" id="inputDanoPVP" />
           <Form.Label>Energia:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputEnergiaPVP"
-          />
+          <Form.Control type="number" id="inputEnergiaPVP" />
           <Form.Label>Turno:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputTurnoPVP"
-          />
+          <Form.Control type="number" id="inputTurnoPVP" />
           <br />
           <h4 className="text-center mt-2 font-weight-bold">PVE</h4>
           <Form.Label>Daño:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputDanoPVE"
-          />
+          <Form.Control type="number" id="inputDanoPVE" />
           <Form.Label>Energía:</Form.Label>
-          <Form.Control
-            type="number"
-            id="inputEnergiaPVE"
-          />
+          <Form.Control type="number" id="inputEnergiaPVE" />
           <br />
         </Form.Group>
         <Button variant="success" type="submit">
@@ -126,9 +114,7 @@ function AgregarAtaqueRapido(): JSX.Element {
         <Modal.Header closeButton>
           <Modal.Title>Ataque guardado</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          El ataque rápido ha sido guardado exitosamente.
-        </Modal.Body>
+        <Modal.Body>El ataque rápido ha sido guardado exitosamente.</Modal.Body>
         <Modal.Footer>
           <Button variant="success" onClick={handleModalClose}>
             Cerrar

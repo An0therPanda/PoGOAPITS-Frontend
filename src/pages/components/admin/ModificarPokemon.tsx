@@ -27,13 +27,13 @@ function ModificarPokemon(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       const resultadoPokemon = await axios.get<Pokemon>(
-        `http://localhost:8000/api/pokemon/${idPokemon}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/pokemones/${idPokemon}`
       );
       const resultadoAtaquesRapidos = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquesrapidos"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       const resultadosAtaquesCargados = await axios.get<Ataque[]>(
-        "http://localhost:8000/api/ataquescargados"
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
 
       setPokemon(resultadoPokemon.data);
@@ -56,9 +56,13 @@ function ModificarPokemon(): JSX.Element {
     };
 
     axios
-      .patch(`http://localhost:8000/api/pokemon/${idPokemon}`, body, {
-        withCredentials: true,
-      })
+      .patch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/pokemon/${idPokemon}`,
+        body,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response.data);
         setModalVisible(true);

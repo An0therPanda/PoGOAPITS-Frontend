@@ -24,7 +24,7 @@ function ModificarAtaqueCargado(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       const resultadoAtaque = await axios.get<Ataque>(
-        `http://localhost:8000/api/ataquecargado/${idAtaque}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquecargado/${idAtaque}`
       );
       setAtaque(resultadoAtaque.data);
     };
@@ -50,7 +50,10 @@ function ModificarAtaqueCargado(): JSX.Element {
     };
 
     axios
-      .patch(`http://localhost:8000/api/ataquecargado/${idAtaque}`, body)
+      .patch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquecargado/${idAtaque}`,
+        body
+      )
       .then((response) => {
         console.log(response.data);
         setModalVisible(true);
@@ -129,4 +132,4 @@ function ModificarAtaqueCargado(): JSX.Element {
   );
 }
 
-export default ModificarAtaqueCargado
+export default ModificarAtaqueCargado;
