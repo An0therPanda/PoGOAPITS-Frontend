@@ -61,7 +61,10 @@ function AgregarAtaqueCargado(): JSX.Element {
 
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/api/ataquecargado`,
-      body
+      body,
+      {
+        withCredentials: true,
+      }
     );
     console.log(response.data);
     setModalVisible(true);
@@ -69,11 +72,11 @@ function AgregarAtaqueCargado(): JSX.Element {
 
   function handleModalClose() {
     setModalVisible(false);
-    navigate("/admin/listapokemones");
+    navigate("/admin/ataques");
   }
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "800px" }}>
       <h2 className="text-center mt-2 font-weight-bold">
         Agregar ataque cargado
       </h2>
@@ -104,9 +107,11 @@ function AgregarAtaqueCargado(): JSX.Element {
           <Form.Control id="inputEnergiaPVE" />
           <br />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Agregar ataque
-        </Button>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" type="submit">
+            Agregar ataque
+          </Button>
+        </div>
       </Form>
       <Modal show={modalVisible} onHide={handleModalClose}>
         <Modal.Header closeButton>

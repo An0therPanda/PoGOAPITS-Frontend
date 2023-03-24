@@ -82,7 +82,7 @@ function ModificarPokemon(): JSX.Element {
   }
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "800px" }}>
       <h2 className="text-center mt-2 font-weight-bold">
         Modificar pokémon con ID {pokemon.idpokedex} - {pokemon.label}
       </h2>
@@ -144,9 +144,11 @@ function ModificarPokemon(): JSX.Element {
           </Form.Select>
           <br />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Guardar cambios
-        </Button>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" type="submit">
+            Guardar cambios
+          </Button>
+        </div>
       </Form>
       <Modal show={modalVisible} onHide={handleModalClose}>
         <Modal.Header closeButton>

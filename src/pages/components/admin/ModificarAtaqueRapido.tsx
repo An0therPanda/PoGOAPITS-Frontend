@@ -55,7 +55,10 @@ function ModificarAtaqueRapido(): JSX.Element {
     axios
       .patch(
         `${process.env.REACT_APP_BACKEND_URL}/api/ataquerapido/${idAtaque}`,
-        body
+        body,
+        {
+          withCredentials: true,
+        }
       )
       .then((response) => {
         console.log(response.data);
@@ -76,7 +79,7 @@ function ModificarAtaqueRapido(): JSX.Element {
   }
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "800px" }}>
       <h2 className="text-center mt-2 font-weight-bold">
         Modificar ataque rápido
       </h2>
@@ -120,9 +123,11 @@ function ModificarAtaqueRapido(): JSX.Element {
           />
           <br />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Guardar cambios
-        </Button>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" type="submit">
+            Guardar cambios
+          </Button>
+        </div>
       </Form>
       <Modal show={modalVisible} onHide={handleModalClose}>
         <Modal.Header closeButton>

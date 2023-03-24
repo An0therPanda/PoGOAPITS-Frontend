@@ -50,29 +50,50 @@ function ListaAtaquesPokemon(): JSX.Element {
       <h2 className="text-center mt-2 font-weight-bold">
         Mejores ataques por Pokémon
       </h2>
-      <Table bordered hover size="m" className="position-relative">
+      <Table
+        bordered
+        hover
+        size="m"
+        className="position-relative"
+        style={{ tableLayout: "fixed" }}
+      >
         <thead className="text-center bg-danger">
           <tr>
-            <th className="text-white align-middle w-20" rowSpan={2}>
+            <th
+              className="text-white align-middle w-20"
+              rowSpan={2}
+              style={{ width: "15%" }}
+            >
               Pokemon
             </th>
             <th
               className="text-white align-middle w-30"
               colSpan={2}
               rowSpan={2}
+              style={{ width: "25%" }}
             >
               Tipos
             </th>
-            <th className="text-white align-middle w-10" rowSpan={2}>
+            <th
+              className="text-white align-middle w-10"
+              rowSpan={2}
+              style={{ width: "10%" }}
+            >
               Generación
             </th>
-            <th className="text-white w-50" colSpan={3}>
+            <th
+              className="text-white w-50"
+              colSpan={3}
+              style={{ width: "50%" }}
+            >
               Ataques
             </th>
           </tr>
           <tr>
-            <th className="text-white">Ataque rápido</th>
-            <th className="text-white" colSpan={2}>
+            <th className="text-white" style={{ width: "20%" }}>
+              Ataque rápido
+            </th>
+            <th className="text-white" colSpan={2} style={{ width: "30%" }}>
               Ataque cargado
             </th>
           </tr>
@@ -99,7 +120,7 @@ function ListaAtaquesPokemon(): JSX.Element {
           ))}
         </tbody>
       </Table>
-      <div className="position-relative">
+      <div className="d-flex justify-content-center">
         <Paginacion
           elementosTotatales={ataquesPokemon.length}
           elementosPorPagina={elementosPorPagina}

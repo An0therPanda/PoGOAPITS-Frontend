@@ -33,9 +33,17 @@ const Login = ({ onLogin }: Props) => {
         `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
         usuario
       );
-      setCookies("PoGO-AUTH", respuesta.data.authentication.sessionToken);
-      onLogin();
-      navigate("/admin/listapokemones");
+      console.log(respuesta.status);
+
+      if (respuesta.status !== 200) {
+        setError("Usuario y/o contraseña incorrectos.");
+        return;
+      } else {
+        console.log(respuesta.status);
+        setCookies("PoGO-AUTH", respuesta.data.authentication.sessionToken);
+        onLogin();
+        navigate("/admin/listapokemones");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -47,30 +55,52 @@ const Login = ({ onLogin }: Props) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <div>
-        <Form.Label>Usuario: </Form.Label>
-        <Form.Control
-          type="text"
-          name="username"
-          value={usuario.username}
-          onChange={handleInputChange}
-        />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50vh",
+      }}
+    >
+      <div style={{ border: "2px solid red", padding: "20px" }}>
+        <div
+          style={{
+            marginBottom: "5px",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Inicia sesión
+        </div>
+        <Form onSubmit={handleSubmit}>
+          {error && <div className="alert alert-danger">{error}</div>}
+          <div>
+            <Form.Label>Usuario: </Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={usuario.username}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <Form.Label>Contraseña: </Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={usuario.password}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="text-center">
+            <Button variant="success" type="submit">
+              Iniciar sesión
+            </Button>
+          </div>
+        </Form>
       </div>
-      <div>
-        <Form.Label>Contraseña: </Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          value={usuario.password}
-          onChange={handleInputChange}
-        />
-      </div>
-      <Button variant="success" type="submit">
-        Iniciar sesión
-      </Button>
-    </Form>
+    </div>
   );
 };
 

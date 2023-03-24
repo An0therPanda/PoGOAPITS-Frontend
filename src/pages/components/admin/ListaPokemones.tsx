@@ -46,7 +46,13 @@ function ListaPokemones(): JSX.Element {
     <Container>
       <h2 className="text-center mt-2 font-weight-bold">Pokémones</h2>
       <Container className="container-fluid">
-        <Table bordered hover size="m" className="position-relative">
+        <Table
+          bordered
+          hover
+          size="m"
+          className="position-relative"
+          style={{ tableLayout: "fixed" }}
+        >
           <thead className="bg-danger text-center">
             <tr>
               <th className="text-white align-middle" rowSpan={2}>
@@ -91,7 +97,7 @@ function ListaPokemones(): JSX.Element {
             ))}
           </tbody>
         </Table>
-        <div className="position-relative">
+        <div className="d-flex justify-content-center">
           <Paginacion
             elementosTotatales={pokemon.length}
             elementosPorPagina={elementosPorPagina}

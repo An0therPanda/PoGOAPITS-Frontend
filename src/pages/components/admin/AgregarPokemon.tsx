@@ -70,7 +70,7 @@ function AgregarPokemon(): JSX.Element {
   }
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "800px", margin: "0 auto" }}>
       <h2 className="text-center mt-2 font-weight-bold">Agregar Pokémon</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
@@ -129,9 +129,11 @@ function AgregarPokemon(): JSX.Element {
           </Form.Select>
           <br />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Agregar Pokémon
-        </Button>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" type="submit">
+            Agregar Pokémon
+          </Button>
+        </div>
       </Form>
       <Modal show={modalVisible} onHide={handleModalClose}>
         <Modal.Header closeButton>

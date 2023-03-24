@@ -32,7 +32,7 @@ function Eficacias(): JSX.Element {
         Eficacia de los ataques
       </h2>
       <div className="d-flex justify-content-center">
-        <label>Selecciona un tipo: </label>
+        <label style={{ marginRight: "10px" }}>Selecciona un tipo: </label>
         <select className="ml-2" onChange={handleTipoSelected}>
           <option>Selecciona un tipo</option>
           {tipos.map((tipo) => (

@@ -90,7 +90,13 @@ function ListaAtaques() {
         Lista de ataques rápidos
       </h2>
       <Container className="container-fluid">
-        <Table bordered hover size="m" className="position-relative">
+        <Table
+          bordered
+          hover
+          size="m"
+          className="position-relative"
+          style={{ tableLayout: "fixed" }}
+        >
           <thead className="bg-danger text-center">
             <tr>
               <th className="text-white align-middle" rowSpan={2}>
@@ -128,18 +134,26 @@ function ListaAtaques() {
             ))}
           </tbody>
         </Table>
-        <Paginacion
-          elementosTotatales={ataquesRapidos.length}
-          elementosPorPagina={elementosPorPagina}
-          onPageChange={paginacionAtaqueRapido}
-          paginaActual={paginaActualAtaqueRapido}
-        />
+        <div className="d-flex justify-content-center">
+          <Paginacion
+            elementosTotatales={ataquesRapidos.length}
+            elementosPorPagina={elementosPorPagina}
+            onPageChange={paginacionAtaqueRapido}
+            paginaActual={paginaActualAtaqueRapido}
+          />
+        </div>
       </Container>
       <h2 className="text-center mt-2 font-weight-bold">
         Lista de ataques cargados
       </h2>
       <Container className="container-fluid">
-        <Table bordered hover size="m" className="position-relative">
+        <Table
+          bordered
+          hover
+          size="m"
+          className="position-relative"
+          style={{ tableLayout: "fixed" }}
+        >
           <thead className="bg-danger text-center">
             <tr>
               <th className="text-white" rowSpan={2}>
@@ -177,12 +191,14 @@ function ListaAtaques() {
             ))}
           </tbody>
         </Table>
-        <Paginacion
-          elementosTotatales={ataquesCargados.length}
-          elementosPorPagina={elementosPorPagina}
-          onPageChange={paginacionAtaqueCargado}
-          paginaActual={paginaActualAtaqueCargado}
-        />
+        <div className="d-flex justify-content-center">
+          <Paginacion
+            elementosTotatales={ataquesCargados.length}
+            elementosPorPagina={elementosPorPagina}
+            onPageChange={paginacionAtaqueCargado}
+            paginaActual={paginaActualAtaqueCargado}
+          />
+        </div>
       </Container>
     </Container>
   );

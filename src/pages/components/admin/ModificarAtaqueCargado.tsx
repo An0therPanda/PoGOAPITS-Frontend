@@ -52,7 +52,10 @@ function ModificarAtaqueCargado(): JSX.Element {
     axios
       .patch(
         `${process.env.REACT_APP_BACKEND_URL}/api/ataquecargado/${idAtaque}`,
-        body
+        body,
+        {
+          withCredentials: true,
+        }
       )
       .then((response) => {
         console.log(response.data);
@@ -73,7 +76,7 @@ function ModificarAtaqueCargado(): JSX.Element {
   }
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "800px" }}>
       <h2 className="text-center mt-2 font-weight-bold">
         Modificar ataque cargado
       </h2>
@@ -111,9 +114,11 @@ function ModificarAtaqueCargado(): JSX.Element {
           />
           <br />
         </Form.Group>
-        <Button variant="success" type="submit">
-          Guardar cambios
-        </Button>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" type="submit">
+            Guardar cambios
+          </Button>
+        </div>
       </Form>
       <Modal show={modalVisible} onHide={handleModalClose}>
         <Modal.Header closeButton>
