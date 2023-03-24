@@ -27,7 +27,7 @@ function ModificarPokemon(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       const resultadoPokemon = await axios.get<Pokemon>(
-        `${process.env.REACT_APP_BACKEND_URL}/api/pokemones/${idPokemon}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/pokemon/${idPokemon}`
       );
       const resultadoAtaquesRapidos = await axios.get<Ataque[]>(
         `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
