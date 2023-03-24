@@ -31,7 +31,9 @@ interface AtaqueCargado {
   pvp: {
     dano: number;
     energia: number;
-    danoporenergia: number;
+    danoporenergia: {
+      $numberDecimal: string;
+    };
   };
   pve: {
     dano: number;
@@ -168,7 +170,7 @@ function ListaAtaques() {
                 <td>{ataque.tipo.label}</td>
                 <td>{ataque.pvp.dano}</td>
                 <td>{ataque.pvp.energia}</td>
-                <td>{JSON.stringify(ataque.pvp.danoporenergia)}</td>
+                <td>{ataque.pvp.danoporenergia.$numberDecimal}</td>
                 <td>{ataque.pve.dano}</td>
                 <td>{ataque.pve.energia}</td>
               </tr>
