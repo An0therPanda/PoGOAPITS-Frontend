@@ -16,7 +16,6 @@ import ListaTipos from "./components/ListaTipos";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import NavBar from "./components/Navbar";
-import logo from "./assets/images/logo.png";
 import Bienvenida from "./components/Bienvenida";
 
 function Home() {

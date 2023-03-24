@@ -13,7 +13,7 @@ const Logout = ({ onLogout }: Props) => {
     const logout = async () => {
       try {
         onLogout();
-        navigate("/tipos");
+        navigate("/");
         await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/api/auth/logout`
         );

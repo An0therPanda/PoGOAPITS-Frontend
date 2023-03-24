@@ -62,7 +62,14 @@ function ListaAtaquesPokemon(): JSX.Element {
             <th
               className="text-white align-middle w-20"
               rowSpan={2}
-              style={{ width: "15%" }}
+              style={{ width: "6%" }}
+            >
+              Pokédex
+            </th>
+            <th
+              className="text-white align-middle w-20"
+              rowSpan={2}
+              style={{ width: "11%" }}
             >
               Pokemon
             </th>
@@ -77,7 +84,7 @@ function ListaAtaquesPokemon(): JSX.Element {
             <th
               className="text-white align-middle w-10"
               rowSpan={2}
-              style={{ width: "10%" }}
+              style={{ width: "8%" }}
             >
               Generación
             </th>
@@ -101,6 +108,7 @@ function ListaAtaquesPokemon(): JSX.Element {
         <tbody className="text-center">
           {itemsActuales.map((pokemon) => (
             <tr key={pokemon.idpokedex}>
+              <td>{pokemon.idpokedex}</td>
               <td>{pokemon.label}</td>
               <td colSpan={pokemon.tiposecundario ? 1 : 2}>
                 {pokemon.tipoprincipal.label}
