@@ -7,7 +7,7 @@ import logo from "../assets/images/logo.png";
 function NavBar() {
   return (
     <Navbar bg="danger" expand="sm" variant="dark">
-      <Navbar.Brand href="/">
+      <Navbar.Brand href="/" style={{ paddingLeft: "5px" }}>
         <img
           src={logo}
           width="100"
@@ -43,6 +43,5 @@ function NavBar() {
     </Navbar>
   );
 }
-
 
 export default NavBar;
