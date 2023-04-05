@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -37,6 +42,11 @@ function ModificarAtaqueCargado(): JSX.Element {
     const energiaPVP = (e.target as any).inputEnergiaPVP.value;
     const danoPVE = (e.target as any).inputDanoPVE.value;
     const energiaPVE = (e.target as any).inputEnergiaPVE.value;
+
+    if (!danoPVP || !energiaPVP || !danoPVE || !energiaPVE) {
+      alert("Por favor complete todos los campos.");
+      return;
+    }
 
     const body = {
       pvp: {

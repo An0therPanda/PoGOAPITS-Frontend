@@ -1,15 +1,17 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Table } from "react-bootstrap";
-import Paginacion from "./Paginacion";
+import { Link } from "react-router-dom";
+import { Button, Container, Table } from "react-bootstrap";
+import Paginacion from "../../Paginacion";
 
 interface AtaqueRapido {
   id: number;
   nombre: string;
-  tipo: {
-    label: string;
-    id: number;
-  };
   pvp: {
     dano: number;
     energia: number;
@@ -24,10 +26,6 @@ interface AtaqueRapido {
 interface AtaqueCargado {
   id: number;
   nombre: string;
-  tipo: {
-    label: string;
-    id: number;
-  };
   pvp: {
     dano: number;
     energia: number;
@@ -41,16 +39,16 @@ interface AtaqueCargado {
   };
 }
 
-function ListaAtaques() {
+function Ataques(): JSX.Element {
   const [ataquesRapidos, setAtaquesRapidos] = useState<AtaqueRapido[]>([]);
   const [ataquesCargados, setAtaquesCargados] = useState<AtaqueCargado[]>([]);
   const [paginaActualAtaqueRapido, setPaginaActualAtaqueRapido] = useState(1);
   const [paginaActualAtaqueCargado, setPaginaActualAtaqueCargado] = useState(1);
-  const [elementosPorPagina] = useState(13);
+  const [elementosPorPagina] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resultadosAtaquesRapidos = await axios.get<AtaqueRapido[]>(
+      const resultadosAtaquesRapidos = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       const resultadosAtaquesCargados = await axios.get(
@@ -85,11 +83,9 @@ function ListaAtaques() {
     setPaginaActualAtaqueCargado(numeroPagina);
 
   return (
-    <Container className="position-relative">
-      <h2 className="text-center mt-2 font-weight-bold">
-        Lista de ataques rápidos
-      </h2>
-      <Container className="container-fluid">
+    <Container>
+      <h2 className="text-center mt-2 font-weight-bold">Ataques rápidos</h2>
+      <Container className="position-relative">
         <Table
           bordered
           hover
@@ -102,14 +98,14 @@ function ListaAtaques() {
               <th className="text-white align-middle" rowSpan={2}>
                 Nombre
               </th>
-              <th className="text-white align-middle" rowSpan={2}>
-                Tipo
-              </th>
               <th className="text-white" colSpan={3}>
                 PVP
               </th>
               <th className="text-white" colSpan={2}>
                 PVE
+              </th>
+              <th className="text-white align-middle" rowSpan={2}>
+                Accion
               </th>
             </tr>
             <tr>
@@ -124,12 +120,21 @@ function ListaAtaques() {
             {itemsActualesAtaqueRapido.map((ataque) => (
               <tr key={ataque.id}>
                 <td>{ataque.nombre}</td>
-                <td>{ataque.tipo.label}</td>
                 <td>{ataque.pvp.dano}</td>
                 <td>{ataque.pvp.energia}</td>
                 <td>{ataque.pvp.turno}</td>
                 <td>{ataque.pve.dano}</td>
                 <td>{ataque.pve.energia}</td>
+                <td>
+                  <Button variant="success">
+                    <Link
+                      className="text-white"
+                      to={`/admin/modificarataquerapido/${ataque.id}`}
+                    >
+                      Modificar
+                    </Link>
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -143,10 +148,8 @@ function ListaAtaques() {
           />
         </div>
       </Container>
-      <h2 className="text-center mt-2 font-weight-bold">
-        Lista de ataques cargados
-      </h2>
-      <Container className="container-fluid">
+      <h2 className="text-center mt-2 font-weight-bold">Ataques cargados</h2>
+      <Container className="position-relative">
         <Table
           bordered
           hover
@@ -156,17 +159,17 @@ function ListaAtaques() {
         >
           <thead className="bg-danger text-center">
             <tr>
-              <th className="text-white" rowSpan={2}>
+              <th className="text-white align-middle" rowSpan={2}>
                 Nombre
-              </th>
-              <th className="text-white" rowSpan={2}>
-                Tipo
               </th>
               <th className="text-white" colSpan={3}>
                 PVP
               </th>
               <th className="text-white" colSpan={2}>
                 PVE
+              </th>
+              <th className="text-white align-middle" rowSpan={2}>
+                Accion
               </th>
             </tr>
             <tr>
@@ -181,12 +184,21 @@ function ListaAtaques() {
             {itemsActualesAtaqueCargado.map((ataque) => (
               <tr key={ataque.id}>
                 <td>{ataque.nombre}</td>
-                <td>{ataque.tipo.label}</td>
                 <td>{ataque.pvp.dano}</td>
                 <td>{ataque.pvp.energia}</td>
                 <td>{ataque.pvp.danoporenergia.$numberDecimal}</td>
                 <td>{ataque.pve.dano}</td>
                 <td>{ataque.pve.energia}</td>
+                <td>
+                  <Button variant="success">
+                    <Link
+                      className="text-white"
+                      to={`/admin/modificarataquecargado/${ataque.id}`}
+                    >
+                      Modificar
+                    </Link>
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -203,4 +215,5 @@ function ListaAtaques() {
     </Container>
   );
 }
-export default ListaAtaques;
+
+export default Ataques;

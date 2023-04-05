@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Table } from "react-bootstrap";
@@ -36,7 +41,7 @@ const ListaTipos: React.FC = () => {
               <tr key={tipo.nombre}>
                 <td>
                   <img
-                    src={require(`../assets/icons/tipos/${tipo.nombre}.png`)}
+                    src={require(`../../assets/icons/tipos/${tipo.nombre}.png`)}
                     alt="icon"
                     width="30"
                     height="30"

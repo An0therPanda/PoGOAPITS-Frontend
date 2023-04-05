@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +48,24 @@ function AgregarAtaqueRapido(): JSX.Element {
     const turnopvp = e.currentTarget.inputTurnoPVP.value;
     const danopve = e.currentTarget.inputDanoPVE.value;
     const energiapve = e.currentTarget.inputEnergiaPVE.value;
+
+    if (
+      !nombre ||
+      !tipo ||
+      !danopvp ||
+      !energiapvp ||
+      !turnopvp ||
+      !danopve ||
+      !energiapve
+    ) {
+      alert("Por favor complete todos los campos.");
+      return;
+    }
+
+    if (isNaN(parseInt(tipo))) {
+      alert("Seleccione un tipo");
+      return;
+    }
 
     const body = {
       _id: _id,

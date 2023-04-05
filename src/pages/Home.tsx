@@ -1,20 +1,25 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AgregarAtaqueCargado from "./components/admin/AgregarAtaqueCargado";
-import AgregarAtaqueRapido from "./components/admin/AgregarAtaqueRapido";
-import AgregarPokemon from "./components/admin/AgregarPokemon";
-import Ataques from "./components/admin/Ataques";
-import ListaPokemones from "./components/admin/ListaPokemones";
-import ModificarAtaqueCargado from "./components/admin/ModificarAtaqueCargado";
-import ModificarAtaqueRapido from "./components/admin/ModificarAtaqueRapido";
-import ModificarPokemon from "./components/admin/ModificarPokemon";
+import AgregarAtaqueCargado from "./components/admin/ataques/AgregarAtaqueCargado";
+import AgregarAtaqueRapido from "./components/admin/ataques/AgregarAtaqueRapido";
+import AgregarPokemon from "./components/admin/pokemon/AgregarPokemon";
+import Ataques from "./components/admin/ataques/Ataques";
+import ListaPokemones from "./components/admin/pokemon/ListaPokemones";
+import ModificarAtaqueCargado from "./components/admin/ataques/ModificarAtaqueCargado";
+import ModificarAtaqueRapido from "./components/admin/ataques/ModificarAtaqueRapido";
+import ModificarPokemon from "./components/admin/pokemon/ModificarPokemon";
 import NavBarAdmin from "./components/admin/NavBarAdmin";
-import ListaAtaquesPokemon from "./components/AtaquesPorPokemon";
-import Eficacias from "./components/Eficacias";
-import ListaAtaques from "./components/ListaAtaques";
-import ListaTipos from "./components/ListaTipos";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
+import ListaAtaquesPokemon from "./components/ataques/AtaquesPorPokemon";
+import Eficacias from "./components/tipos/Eficacias";
+import ListaAtaques from "./components/ataques/ListaAtaques";
+import ListaTipos from "./components/tipos/ListaTipos";
+import Login from "./components/login/Login";
+import Logout from "./components/login/Logout";
 import NavBar from "./components/Navbar";
 import Bienvenida from "./components/Bienvenida";
 

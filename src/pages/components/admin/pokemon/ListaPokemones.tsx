@@ -1,8 +1,13 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Paginacion from "../Paginacion";
+import Paginacion from "../../Paginacion";
 
 interface Pokemon {
   idpokedex: number;

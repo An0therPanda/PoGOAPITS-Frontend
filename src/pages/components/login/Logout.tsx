@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

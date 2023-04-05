@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -41,16 +46,54 @@ function AgregarPokemon(): JSX.Element {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const idpokedex = e.currentTarget.inputIdPokedex.value;
+    const nombre = e.currentTarget.inputNombre.value;
+    const label = e.currentTarget.inputLabel.value;
+    const tipoprincipal = e.currentTarget.selectTipoPrincipal.value;
+    const tiposecundario = e.currentTarget.selectTipoSecundario.value;
+    const generacion = e.currentTarget.inputGeneracion.value;
+    const ataquecargado1 = e.currentTarget.selectAtaqueCargadoPrincipal.value;
+    const ataquecargado2 = e.currentTarget.selectAtaqueCargadoSecundario.value;
+    const ataquerapido = e.currentTarget.selectAtaqueRapido.value;
+
+    if (
+      !idpokedex ||
+      !nombre ||
+      !label ||
+      !tipoprincipal ||
+      !generacion ||
+      !ataquecargado1 ||
+      !ataquerapido
+    ) {
+      alert("Por favor complete todos los campos.");
+      return;
+    }
+
+    if (isNaN(parseInt(tipoprincipal))) {
+      alert("Seleccione un tipo principal");
+      return;
+    }
+
+    if (isNaN(parseInt(ataquecargado1))) {
+      alert("Seleccione un ataque cargado principal");
+      return;
+    }
+
+    if (isNaN(parseInt(ataquerapido))) {
+      alert("Seleccione un tipo principal");
+      return;
+    }
+
     const body = {
-      idpokedex: e.currentTarget.inputIdPokedex.value,
-      nombre: e.currentTarget.inputNombre.value,
-      label: e.currentTarget.inputLabel.value,
-      tipoprincipal: e.currentTarget.selectTipoPrincipal.value,
-      tiposecundario: e.currentTarget.selectTipoSecundario.value,
-      generacion: e.currentTarget.inputGeneracion.value,
-      ataquecargado1: e.currentTarget.selectAtaqueCargadoPrincipal.value,
-      ataquecargado2: e.currentTarget.selectAtaqueCargadoSecundario.value,
-      ataquerapido: e.currentTarget.selectAtaqueRapido.value,
+      idpokedex: idpokedex,
+      nombre: nombre,
+      label: label,
+      tipoprincipal: tipoprincipal,
+      tiposecundario: tiposecundario,
+      generacion: generacion,
+      ataquecargado1: ataquecargado1,
+      ataquecargado2: ataquecargado2,
+      ataquerapido: ataquerapido,
     };
 
     const response = await axios.post(
@@ -60,7 +103,7 @@ function AgregarPokemon(): JSX.Element {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+    console.log(response.status);
     setModalVisible(true);
   };
 
@@ -99,7 +142,7 @@ function AgregarPokemon(): JSX.Element {
             ))}
           </Form.Select>
           <Form.Label>Generación:</Form.Label>
-          <Form.Control type="text" id="inputGeneracion" />
+          <Form.Control type="number" id="inputGeneracion" />
           <Form.Label>Ataque rápido:</Form.Label>
           <Form.Select id="selectAtaqueRapido">
             <option value="">Seleccina un ataque rápido</option>

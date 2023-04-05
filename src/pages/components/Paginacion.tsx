@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React from "react";
 import PropTypes from "prop-types";
 import { Pagination } from "react-bootstrap";

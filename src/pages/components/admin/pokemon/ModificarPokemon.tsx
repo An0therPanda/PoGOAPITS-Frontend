@@ -1,3 +1,8 @@
+/*
+ * Fecha de creación: 23-03-2023
+ * Autor: Alfredo Leonelli
+ * Contacto: alfredoleonellim@gmail.com
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -33,7 +38,7 @@ function ModificarPokemon(): JSX.Element {
         `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
       );
       const resultadosAtaquesCargados = await axios.get<Ataque[]>(
-        `${process.env.REACT_APP_BACKEND_URL}/api/ataquesrapidos`
+        `${process.env.REACT_APP_BACKEND_URL}/api/ataquescargados`
       );
 
       setPokemon(resultadoPokemon.data);
@@ -48,6 +53,21 @@ function ModificarPokemon(): JSX.Element {
     const idAtaqueRapido = e.currentTarget.selectAtaqueRapido.value;
     const idAtaqueCargado1 = e.currentTarget.selectAtaqueCargado1.value;
     const idAtaqueCargado2 = e.currentTarget.selectAtaqueCargado2.value;
+
+    if (isNaN(parseInt(idAtaqueRapido))) {
+      alert("Seleccione un tipo");
+      return;
+    }
+
+    if (isNaN(parseInt(idAtaqueCargado1))) {
+      alert("Seleccione un tipo");
+      return;
+    }
+
+    if (isNaN(parseInt(idAtaqueCargado2))) {
+      alert("Seleccione un tipo");
+      return;
+    }
 
     const body = {
       idAtaqueRapido: idAtaqueRapido,
